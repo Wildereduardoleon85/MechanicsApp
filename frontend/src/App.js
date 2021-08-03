@@ -1,11 +1,17 @@
 import './App.css';
 import React from 'react';
-import Navbar from './Components/layout/Navbar'
+import Navbar from './Components/layout/Navbar';
+import Tickets from './Components/Tickets';
 
 function App() {
   return (
     <>
-      <Navbar/>
+      <header>
+        <Navbar/>
+      </header>
+      <main>
+        <Tickets/>
+      </main>
     </>
   );
 }

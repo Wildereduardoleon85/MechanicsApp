@@ -2,9 +2,11 @@ import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 dotenv.config();
 
+const mongoURI = `mongodb+srv://${process.env.mongoUser}:${process.env.mongoPassword}@cluster0.ytrtz.mongodb.net/mechanicsAppDatabase?retryWrites=true&w=majority`
+
 const connectDB = async ()=>{
     try {
-        await mongoose.connect(process.env.mongoURI, {
+        await mongoose.connect(mongoURI, {
             useNewUrlParser: true,
             useCreateIndex: true,
             useFindAndModify: false,
