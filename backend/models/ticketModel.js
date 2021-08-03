@@ -5,9 +5,10 @@ const TicketSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    attention: {
+    resolved: {
         type: Boolean,
-        required: true
+        required: true,
+        default: false
     },
     mechanic: {
         type: String,
@@ -19,4 +20,6 @@ const TicketSchema = mongoose.Schema({
     },
 });
 
-export default mongoose.model('ticket', TicketSchema);
+const Ticket = mongoose.model('Ticket', TicketSchema)
+
+export default Ticket;

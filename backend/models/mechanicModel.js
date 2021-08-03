@@ -11,4 +11,4 @@ const MechanicSchema = mongoose.Schema({
     }
 });
 
-export default mongoose.model('mechanic', MechanicSchema);
+export default mongoose.model('Mechanic', MechanicSchema);
