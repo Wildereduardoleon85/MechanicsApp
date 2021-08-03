@@ -1,10 +1,10 @@
 import mongoose from 'mongoose';
-
-const mongoURI = 'mongodb+srv://wilder:ELlcrIZ9FxWpjEuh@cluster0.ytrtz.mongodb.net/mechanicsAppDatabase?retryWrites=true&w=majority'
+import dotenv from 'dotenv';
+dotenv.config();
 
 const connectDB = async ()=>{
     try {
-        await mongoose.connect(mongoURI, {
+        await mongoose.connect(process.env.mongoURI, {
             useNewUrlParser: true,
             useCreateIndex: true,
             useFindAndModify: false,
