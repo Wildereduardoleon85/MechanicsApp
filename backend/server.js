@@ -1,12 +1,16 @@
 import express from 'express';
 import ticketsRoutes from './routes/tickets.js';
 import mechanicsRoutes from './routes/mechanics.js';
+import connectDB from './config/db.js';
 
+//Initializations
 const app = express();
 
-app.get('/', (req, res)=>{
-    res.json({msg: 'Hello World'})
-});
+//Connect Database
+connectDB();
+
+//Middlewares
+app.use(express.json({extended: false}));
 
 // Routes:
 app.use('/api/v1/tickets', ticketsRoutes);
