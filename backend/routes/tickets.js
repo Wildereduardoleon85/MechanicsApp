@@ -22,7 +22,18 @@ router.post('/', async(req, res)=>{
         console.error(err.message);
         res.status(500).send('Server Error');
     } 
+});
 
+// @route   GET /api/v1/tickets
+// @desc    Get all tickets 
+router.get('/', async(req, res)=>{
+    try {
+        const tickets = await Ticket.find();
+        res.json(tickets);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server Error');
+    }
 });
 
 export default router;

@@ -21,7 +21,19 @@ router.post('/', async(req, res)=>{
         console.error(err.message);
         res.status(500).send('Server Error');
     } 
+});
 
+
+// @route   GET /api/v1/mechanics
+// @desc    Get all mechanics 
+router.get('/', async(req, res)=>{
+    try {
+        const mechanics = await Mechanic.find();
+        res.json(mechanics);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server Error');
+    }
 });
 
 export default router;
