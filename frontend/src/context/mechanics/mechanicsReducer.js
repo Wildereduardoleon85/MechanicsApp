@@ -1,9 +1,10 @@
 import { 
-    GET_MECHANICS
+    GET_MECHANICS,
+    ADD_MECHANIC
      } from '../types';
 
 
-const ticketsReducer = (state, action) => {
+const mechanicsReducer = (state, action) => {
     switch(action.type){
         case GET_MECHANICS:
             return{
@@ -11,9 +12,15 @@ const ticketsReducer = (state, action) => {
                 mechanics: action.payload,
                 loading: false
             };
+        case ADD_MECHANIC:
+            return{
+                ...state,
+                mechanics: [action.payload, ...state.mechanics],
+                loading: false
+            };
         default:
             return  state;
     } 
 }
 
-export default ticketsReducer;
+export default mechanicsReducer;

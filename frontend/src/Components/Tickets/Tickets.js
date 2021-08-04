@@ -1,7 +1,7 @@
 import React, {useEffect, useContext} from 'react';
 import TicketsContext from '../../context/tickets/ticketsContext';
 import AddTicketModal from './AddTicketModal';
-import UpdateTicketModal from './UpdateTicketModal';
+import AddMechanicModal from '../Mechanics/AddMechanicModal';
 import TicketsItem from './TicketsItem';
 
 const Tickets = () => {
@@ -33,7 +33,7 @@ const Tickets = () => {
                                     <span className="material-icons">note_add</span></button>
                             <button 
                                 className="addMechanic-btn btn-success ms-3"
-                                data-bs-toggle="modal" data-bs-target="#updateTicketModal"
+                                data-bs-toggle="modal" data-bs-target="#addMechanicModal"
                             >
                                 <span className="material-icons">person_add</span>
                             </button>
@@ -49,7 +49,7 @@ const Tickets = () => {
                     </div>
                 </div>
                 <AddTicketModal/>
-                <UpdateTicketModal/>
+                <AddMechanicModal/>
             </>
         )
     }

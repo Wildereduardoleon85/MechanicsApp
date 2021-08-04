@@ -3,7 +3,8 @@ import axios from 'axios';
 import MechanicsContext from './mechanicsContext';
 import mechanicsReducer from './mechanicsReducer';
 import { 
-    GET_MECHANICS
+    GET_MECHANICS,
+    ADD_MECHANIC
     } from '../types';
 
 const MechanicsState = props => {
@@ -22,8 +23,16 @@ const MechanicsState = props => {
     };
         
 
-    //Add Mechanics
-    
+    //Add Mechanic
+    const addMechanic = async mechanic => {
+        const config = {
+            headers: {
+                'Cotent-type': 'application/json'
+            }
+        }
+        const res = await axios.post('/api/v1/mechanics', mechanic, config);
+        dispatch({type: ADD_MECHANIC, payload: res.data});
+    };
 
     //Delete Mechanics
     
@@ -52,7 +61,8 @@ const MechanicsState = props => {
                 mechanics: state.mechanics,
                 loading: state.loading,
                 error: state.error,
-                getMechanics
+                getMechanics,
+                addMechanic
             }}
         >
             {props.children}

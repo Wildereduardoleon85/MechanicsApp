@@ -2,7 +2,7 @@ import React, {useContext, useEffect, useState} from 'react';
 import MechanicsContext from '../../context/mechanics/mechanicsContext';
 import TicketsContext from '../../context/tickets/ticketsContext';
 
-const AddTicketForm = (props) => {
+const AddTicketForm = () => {
     const mechanicsContext = useContext(MechanicsContext);
     const ticketsContext = useContext(TicketsContext);
 
