@@ -1,14 +1,15 @@
 import React, {useEffect, useContext} from 'react';
 import TicketsContext from '../context/tickets/ticketsContext';
-
+import TicketsItem from './TicketsItem';
 
 const Tickets = () => {
     const ticketsContext = useContext(TicketsContext);
 
-    const {loading, tickets, getTickets, error} = ticketsContext
+    const {loading, tickets, getTickets} = ticketsContext
 
     useEffect(()=>{
         getTickets()
+        // eslint-disable-next-line
     },[])
 
     if(loading === true && tickets.length < 1){
@@ -31,9 +32,7 @@ const Tickets = () => {
                         <h5 className="card-title">Tickets List</h5>
                     </div>
                     <ul className="list-group list-group-flush">
-                        <li className="list-group-item">An item</li>
-                        <li className="list-group-item">A second item</li>
-                        <li className="list-group-item">A third item</li>
+                        {tickets.map(ticket=> <TicketsItem key={ticket._id} ticket={ticket}/>)}
                     </ul>
                 </div>
             </div>

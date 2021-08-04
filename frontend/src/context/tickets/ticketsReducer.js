@@ -3,7 +3,7 @@ import {
      } from '../types';
 
 
-export default (state, action) => {
+const ticketsReducer = (state, action) => {
     switch(action.type){
         case GET_TICKETS:
             return{
@@ -13,5 +13,7 @@ export default (state, action) => {
             };
         default:
             return  state;
-    }
+    } 
 }
+
+export default ticketsReducer;
