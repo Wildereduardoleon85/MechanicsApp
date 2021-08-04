@@ -8,7 +8,7 @@ const ticketsReducer = (state, action) => {
         case GET_MECHANICS:
             return{
                 ...state,
-                tickets: action.payload,
+                mechanics: action.payload,
                 loading: false
             };
         default:

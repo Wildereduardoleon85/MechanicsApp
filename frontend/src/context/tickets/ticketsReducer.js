@@ -1,5 +1,6 @@
 import { 
-    GET_TICKETS
+    GET_TICKETS,
+    ADD_TICKET
      } from '../types';
 
 
@@ -9,6 +10,12 @@ const ticketsReducer = (state, action) => {
             return{
                 ...state,
                 tickets: action.payload,
+                loading: false
+            };
+        case ADD_TICKET:
+            return{
+                ...state,
+                tickets: [action.payload, ...state.tickets],
                 loading: false
             };
         default:

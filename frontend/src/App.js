@@ -1,7 +1,7 @@
 import './App.css';
 import React from 'react';
-import Navbar from './Components/layout/Navbar';
-import Tickets from './Components/Tickets';
+import Navbar from './Components/Navbar';
+import Tickets from './Components/Tickets/Tickets';
 import TicketsState from './context/tickets/TicketsState';
 import MechanicsState from './context/mechanics/MechanicsState';
 

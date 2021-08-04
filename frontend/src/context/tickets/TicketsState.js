@@ -4,7 +4,7 @@ import TicketsContext from './ticketsContext';
 import ticketsReducer from './ticketsReducer';
 import { 
     GET_TICKETS,
-    TICKET_ERROR
+    ADD_TICKET
     } from '../types';
 
 const TicketsState = props => {
@@ -18,18 +18,20 @@ const TicketsState = props => {
 
     // Get Tickets
     const getTickets = async () => {
-        try {
-            const res = await axios.get('/api/v1/tickets');
-            dispatch({type: GET_TICKETS, payload: res.data});
-        } catch (err) {
-            dispatch({type: TICKET_ERROR, payload: err.response.msg});
-        }
+        const res = await axios.get('/api/v1/tickets');
+        dispatch({type: GET_TICKETS, payload: res.data});
     };
         
-    
-
     //Add Ticket
-    
+    const addTicket = async ticket => {
+        const config = {
+            headers: {
+                'Cotent-type': 'application/json'
+            }
+        }
+        const res = await axios.post('/api/v1/tickets', ticket, config);
+        dispatch({type: ADD_TICKET, payload: res.data});
+    };
 
     //Delete Ticket
     
@@ -58,7 +60,8 @@ const TicketsState = props => {
                 tickets: state.tickets,
                 loading: state.loading,
                 error: state.error,
-                getTickets
+                getTickets,
+                addTicket
             }}
         >
             {props.children}

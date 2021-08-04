@@ -28,7 +28,7 @@ router.post('/', async(req, res)=>{
 // @desc    Get all tickets 
 router.get('/', async(req, res)=>{
     try {
-        const tickets = await Ticket.find();
+        const tickets = await Ticket.find().sort({date: -1});
         res.json(tickets);
     } catch (err) {
         console.error(err.message);

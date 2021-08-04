@@ -3,13 +3,12 @@ import axios from 'axios';
 import MechanicsContext from './mechanicsContext';
 import mechanicsReducer from './mechanicsReducer';
 import { 
-    GET_MECHANICS,
-    MECHANIC_ERROR
+    GET_MECHANICS
     } from '../types';
 
 const MechanicsState = props => {
     const initialState = {
-        mechanics: [],
+        mechanics: null,
         loading: true,
         error: null
     };
@@ -18,15 +17,10 @@ const MechanicsState = props => {
 
     // Get Mechanics
     const getMechanics = async () => {
-        try {
-            const res = await axios.get('/api/v1/mechanics');
-            dispatch({type: GET_MECHANICS, payload: res.data});
-        } catch (err) {
-            dispatch({type: MECHANIC_ERROR, payload: err.response.msg});
-        }
+        const res = await axios.get('/api/v1/mechanics');
+        dispatch({type: GET_MECHANICS, payload: res.data});
     };
         
-    
 
     //Add Mechanics
     

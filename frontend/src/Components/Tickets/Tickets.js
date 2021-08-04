@@ -1,7 +1,7 @@
 import React, {useEffect, useContext} from 'react';
-import TicketsContext from '../context/tickets/ticketsContext';
-import AddTicketModal from './layout/AddTicketModal';
-import UpdateTicketModal from './layout/UpdateTicketModal';
+import TicketsContext from '../../context/tickets/ticketsContext';
+import AddTicketModal from './AddTicketModal';
+import UpdateTicketModal from './UpdateTicketModal';
 import TicketsItem from './TicketsItem';
 
 const Tickets = () => {
