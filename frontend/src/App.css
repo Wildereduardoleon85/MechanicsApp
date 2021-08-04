@@ -8,13 +8,15 @@
   position: relative;
 }
 
-.carLogo {
+.carLogo,
+.githubLogo {
   width: 130px;
   display: flex;
   align-items: center;
 }
 
-.carLogo img {
+.carLogo img,
+.githubLogo img {
   width: 100%;
 }
 

@@ -5,7 +5,7 @@ import TicketsContext from '../../context/tickets/ticketsContext';
 const EditTicketModal = () => {
     const ticketsContext = useContext(TicketsContext);
 
-    const {setEditModalOff, showEditModal} = ticketsContext;
+    const {setEditModalOff, showEditModal, clearSingle} = ticketsContext;
 
     useEffect(()=>{
         if(showEditModal){
@@ -13,7 +13,12 @@ const EditTicketModal = () => {
         }else{
             document.body.style.overflowY = 'visible'
         }
-    },[showEditModal])
+    },[showEditModal]);
+
+    const handleClick = () => {
+        setEditModalOff();
+        clearSingle();
+    }
 
     return (
         <div className="editModal" style={showEditModal ? {display: 'block'} : {display: 'none'}}>
@@ -21,7 +26,7 @@ const EditTicketModal = () => {
                 <div className="modal-content">
                     <div className="modal-header">
                         <h5 className="modal-title" id="staticBackdropLabel">Edit Ticket</h5>
-                        <button type="button" className="btn-close" onClick={()=> setEditModalOff()}></button>
+                        <button type="button" className="btn-close" onClick={handleClick}></button>
                     </div>
                     <EditTicketForm/>
                 </div>

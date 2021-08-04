@@ -49,26 +49,14 @@ router.get('/:id', async(req, res)=>{
 });
 
 
-// @route   PUT api/v1/tickets
+// @route   put api/v1/tickets
 // @desc    Update ticket
 router.put('/:id', async(req, res)=>{
-    const {message, mechanic, resolved} = req.body;
 
-    //Build contact object
-    const contactFields = {};
-    if(message) contactFields.message = message;
-    if(mechanic) contactFields.mechanic = mechanic;
-    if(resolved) contactFields.resolved = resolved;
-
-    try {
-        let ticket = await Ticket.findById(req.params.id);
-
-        if(!ticket) return res.status(404).json({msg: 'Ticket not found'});
-
-        ticket = await Ticket.findByIdAndUpdate(req.params.id, 
-            {$set: contactFields},
-            {new: true});
-            res.json(ticket);
+    try{
+        const ticket = await Ticket.findByIdAndUpdate(req.params.id, req.body);
+        if(!ticket)throw Error('Something went wrong while updating the ticket!');
+        res.status(200).json(ticket);
 
     } catch (err) {
         console.error(err.message);

@@ -29,13 +29,14 @@ const EditTicketForm = () => {
         const ticket = {
             message: message,
             resolved: resolved,
-            mechanic: mechanic
+            mechanic: mechanic,
+            date: Date.now()
         }
         
         updateTicket(ticket, singleTicket._id);
         window.location.reload();
     }
-
+    
     const clearForm = () => {
         setMessage('');
         setResolved(false);
