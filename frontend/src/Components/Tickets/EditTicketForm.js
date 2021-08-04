@@ -7,7 +7,7 @@ const EditTicketForm = () => {
     const ticketsContext = useContext(TicketsContext);
 
     const {mechanics, getMechanics} = mechanicsContext;
-    const {addTicket, setEditModalOff, singleTicket, clearSingle} = ticketsContext;
+    const {updateTicket, setEditModalOff, singleTicket, clearSingle} = ticketsContext;
 
     const [message, setMessage] = useState('');
     const [resolved, setResolved] = useState(false);
@@ -31,7 +31,8 @@ const EditTicketForm = () => {
             resolved: resolved,
             mechanic: mechanic
         }
-        addTicket(ticket);
+        
+        updateTicket(ticket, singleTicket._id);
         window.location.reload();
     }
 

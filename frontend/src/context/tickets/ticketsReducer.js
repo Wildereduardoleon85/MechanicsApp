@@ -5,7 +5,8 @@ import {
     SET_EDITMODALOFF,
     GET_SINGLE_TICKET,
     CLEAR_SINGLE,
-    UPDATE_TICKET
+    UPDATE_TICKET,
+    DELETE_TICKET
      } from '../types';
 
 
@@ -42,13 +43,23 @@ const ticketsReducer = (state, action) => {
         case CLEAR_SINGLE:
         return{
             ...state,
-            singleTicket: []
+            singleTicket: {
+                message: '',
+                resolved: false,
+                mechanic: ''
+            }
         };
         case UPDATE_TICKET:
         return{
             ...state,
             showEditModal: false,
             singleTicket: [],
+            loading: false
+        };
+        case DELETE_TICKET:
+        return{
+            ...state,
+            showEditModal: false,
             loading: false
         };
         default:

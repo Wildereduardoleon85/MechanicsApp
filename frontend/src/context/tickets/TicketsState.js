@@ -9,13 +9,18 @@ import {
     SET_EDITMODALOFF,
     GET_SINGLE_TICKET,
     CLEAR_SINGLE,
-    UPDATE_TICKET
+    UPDATE_TICKET,
+    DELETE_TICKET
     } from '../types';
 
 const TicketsState = props => {
     const initialState = {
         tickets: [],
-        singleTicket:[],
+        singleTicket:{
+            message: '',
+            mechanic: '',
+            resolved: false
+        },
         loading: true,
         error: null,
         showEditModal: false
@@ -56,7 +61,6 @@ const TicketsState = props => {
         dispatch({type: GET_SINGLE_TICKET, payload: res.data});
     };
 
-
     //Update Ticket
     const updateTicket = async (ticket, id) => {
         const config = {
@@ -68,8 +72,11 @@ const TicketsState = props => {
         dispatch({type: UPDATE_TICKET, payload: res.data});
     };
 
-    // Clear Tickets
-    
+    // Delete Ticket
+    const deleteTicket = async id => {
+        await axios.delete(`/api/v1/tickets/${id}`);
+        dispatch({type: DELETE_TICKET});
+    };
 
     //Clear current ticket
     const clearSingle = () => {
@@ -96,7 +103,8 @@ const TicketsState = props => {
                 getSingleTicket,
                 singleTicket: state.singleTicket,
                 clearSingle,
-                updateTicket
+                updateTicket,
+                deleteTicket
             }}
         >
             {props.children}

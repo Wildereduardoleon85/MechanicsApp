@@ -7,8 +7,7 @@ const TicketSchema = mongoose.Schema({
     },
     resolved: {
         type: Boolean,
-        required: true,
-        default: false
+        required: true
     },
     mechanic: {
         type: String,

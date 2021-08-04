@@ -76,4 +76,22 @@ router.put('/:id', async(req, res)=>{
     }
 });
 
+
+// @route   DELETE api/v1/tickets
+// @desc    Delete ticket
+router.delete('/:id', async(req, res)=>{
+    try {
+        let ticket = await Ticket.findById(req.params.id);
+
+        if(!ticket) return res.status(404).json({msg: 'Ticket not found'});
+
+        await Ticket.findByIdAndRemove(req.params.id);
+        res.json({msg: 'Ticket Removed'})
+
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server Error');
+    }
+});
+
 export default router;

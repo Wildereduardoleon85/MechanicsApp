@@ -8,11 +8,16 @@ const TicketsItem = ({ticket}) => {
 
     const ticketsContext = useContext(TicketsContext);
 
-    const {setEditModalOn, getSingleTicket} = ticketsContext;
+    const {setEditModalOn, getSingleTicket, deleteTicket} = ticketsContext;
 
     const handleClick = (e) => {
         setEditModalOn();
         getSingleTicket(e.target.id)
+    }
+
+    const removeTicket = (e) => {
+        deleteTicket(e.target.id);
+        window.location.reload();
     }
 
     return (
@@ -39,7 +44,14 @@ const TicketsItem = ({ticket}) => {
                     : 
                         <span className="material-icons text-warning">pending_actions</span>
                     }
-                    <span style={{cursor:'pointer'}} className="material-icons text-secondary ms-3">delete</span>
+                    <span
+                        id={_id}
+                        style={{cursor:'pointer'}} 
+                        className="material-icons text-secondary ms-3"
+                        onClick={removeTicket}
+                    >
+                        delete
+                    </span>
                 </div>
             </li>
         </>
