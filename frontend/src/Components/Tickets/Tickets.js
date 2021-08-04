@@ -3,6 +3,7 @@ import TicketsContext from '../../context/tickets/ticketsContext';
 import AddTicketModal from './AddTicketModal';
 import AddMechanicModal from '../Mechanics/AddMechanicModal';
 import TicketsItem from './TicketsItem';
+import EditTicketModal from './EditTicketModal';
 
 const Tickets = () => {
     const ticketsContext = useContext(TicketsContext);
@@ -19,7 +20,7 @@ const Tickets = () => {
     }else{
         return (
             <>
-                <div className="tickets container col-7 mt-5">
+                <div className="tickets container col-7 mt-5 mb-5">
                     <div className="d-flex align-items-center">
                         <div className="carLogo">
                             <img src="./img/carLogo.png" alt="Car Logo" />
@@ -50,6 +51,7 @@ const Tickets = () => {
                 </div>
                 <AddTicketModal/>
                 <AddMechanicModal/>
+                <EditTicketModal/>
             </>
         )
     }

@@ -40,10 +40,38 @@
   box-shadow: none;
 }
 
-.updateModal {
-  position: absolute;
-  top: 0;
+@keyframes modal_background {
+  from {
+    background-color: rgba(0, 0, 0, 0);
+  }
+  to {
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+}
+
+@keyframes modal_fade_down {
+  from {
+    top: -50px;
+  }
+  to {
+    top: 0px;
+  }
+}
+
+.editModal {
+  background-color: rgba(0, 0, 0, 0.5);
+  position: fixed;
   left: 0;
+  top: 0;
   width: 100vw;
   height: 100vh;
+  animation-name: modal_background;
+  animation-duration: 0.5s;
+  animation-timing-function: ease;
+}
+
+.editModal > div {
+  animation-name: modal_fade_down;
+  animation-duration: 0.5s;
+  animation-timing-function: ease;
 }
