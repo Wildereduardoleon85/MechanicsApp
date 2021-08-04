@@ -4,6 +4,10 @@
   font-family: "Roboto", sans-serif;
 }
 
+.tickets {
+  position: relative;
+}
+
 .carLogo {
   width: 130px;
   display: flex;
@@ -34,4 +38,12 @@
 .addTIcket-btn:active,
 .addMechanic-btn:active {
   box-shadow: none;
+}
+
+.updateModal {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
 }

@@ -1,2 +1,4 @@
 export const GET_TICKETS = 'GET_TICKETS';
 export const TICKET_ERROR = 'TICKET_ERROR';
+export const GET_MECHANICS = 'GET_MECHANICS';
+export const MECHANIC_ERROR = 'MECHANIC_ERROR';

@@ -1,5 +1,7 @@
 import React, {useEffect, useContext} from 'react';
 import TicketsContext from '../context/tickets/ticketsContext';
+import AddTicketModal from './layout/AddTicketModal';
+import UpdateTicketModal from './layout/UpdateTicketModal';
 import TicketsItem from './TicketsItem';
 
 const Tickets = () => {
@@ -16,26 +18,39 @@ const Tickets = () => {
         return <h2>Loading...</h2>
     }else{
         return (
-            <div className="tickets container col-7 mt-5">
-                <div className="d-flex align-items-center">
-                    <div className="carLogo">
-                        <img src="./img/carLogo.png" alt="Car Logo" />
+            <>
+                <div className="tickets container col-7 mt-5">
+                    <div className="d-flex align-items-center">
+                        <div className="carLogo">
+                            <img src="./img/carLogo.png" alt="Car Logo" />
+                        </div>
+                        <h2 className="mb-0 ms-4">Car Workshop</h2>
+                        <div className="ms-auto d-flex flex-row">
+                            <button 
+                                className="addTIcket-btn btn-primary ms-3"
+                                data-bs-toggle="modal" data-bs-target="#addTicketModal"
+                            >
+                                    <span className="material-icons">note_add</span></button>
+                            <button 
+                                className="addMechanic-btn btn-success ms-3"
+                                data-bs-toggle="modal" data-bs-target="#updateTicketModal"
+                            >
+                                <span className="material-icons">person_add</span>
+                            </button>
+                        </div>
                     </div>
-                    <h2 className="mb-0 ms-4">Car Workshop</h2>
-                    <div className="ms-auto d-flex flex-row">
-                        <button className="addTIcket-btn btn-primary ms-3"><span className="material-icons">note_add</span></button>
-                        <button className="addMechanic-btn btn-success ms-3"><span className="material-icons">person_add</span></button>
+                    <div className="card mt-3" style={{width: '18 rem'}}>
+                        <div className="card-body">
+                            <h5 className="card-title">Tickets List</h5>
+                        </div>
+                        <ul className="list-group list-group-flush">
+                            {tickets.map(ticket=> <TicketsItem key={ticket._id} ticket={ticket}/>)}
+                        </ul>
                     </div>
                 </div>
-                <div className="card mt-3" style={{width: '18 rem'}}>
-                    <div className="card-body">
-                        <h5 className="card-title">Tickets List</h5>
-                    </div>
-                    <ul className="list-group list-group-flush">
-                        {tickets.map(ticket=> <TicketsItem key={ticket._id} ticket={ticket}/>)}
-                    </ul>
-                </div>
-            </div>
+                <AddTicketModal/>
+                <UpdateTicketModal/>
+            </>
         )
     }
 }
