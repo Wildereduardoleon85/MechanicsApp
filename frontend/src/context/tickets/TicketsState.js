@@ -10,20 +10,22 @@ import {
     GET_SINGLE_TICKET,
     CLEAR_SINGLE,
     UPDATE_TICKET,
-    DELETE_TICKET
+    DELETE_TICKET,
+    FILTER_TICKETS,
+    CLEAR_FILTER
     } from '../types';
 
 const TicketsState = props => {
     const initialState = {
-        tickets: [],
+        tickets: null,
         singleTicket:{
             message: '',
             mechanic: '',
             resolved: false
         },
         loading: true,
-        error: null,
-        showEditModal: false
+        showEditModal: false,
+        filtered: null
     };
 
     const [state, dispatch] = useReducer(ticketsReducer, initialState);
@@ -84,10 +86,14 @@ const TicketsState = props => {
     }
 
     //Filter tickets
-    
+    const filterTickets = (text)=> {
+        dispatch({type: FILTER_TICKETS, payload: text})
+    }
 
     //Clear Filter
-    
+    const clearFilter = () => {
+        dispatch({type: CLEAR_FILTER})
+    }
 
     return (
         <TicketsContext.Provider 
@@ -104,7 +110,10 @@ const TicketsState = props => {
                 singleTicket: state.singleTicket,
                 clearSingle,
                 updateTicket,
-                deleteTicket
+                deleteTicket,
+                filtered: state.filtered,
+                filterTickets,
+                clearFilter
             }}
         >
             {props.children}

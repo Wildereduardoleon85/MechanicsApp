@@ -10,9 +10,9 @@ import {
 
 const GithubState = props => {
     const initialState = {
-        commits: [],
+        commits: null,
         loading: true,
-        repo: []
+        repo: null
     };
 
     const [state, dispatch] = useReducer(githubReducer, initialState);

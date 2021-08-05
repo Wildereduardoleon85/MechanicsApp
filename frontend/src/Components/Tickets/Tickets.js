@@ -1,4 +1,4 @@
-import React, {useEffect, useContext} from 'react';
+import React, {useEffect, useContext, useRef} from 'react';
 import TicketsContext from '../../context/tickets/ticketsContext';
 import AddTicketModal from './AddTicketModal';
 import AddMechanicModal from '../Mechanics/AddMechanicModal';
@@ -9,14 +9,25 @@ import Spinner from '../Spinner';
 const Tickets = () => {
     const ticketsContext = useContext(TicketsContext);
 
-    const {loading, tickets, getTickets} = ticketsContext
+    const {loading, tickets, getTickets, filterTickets, clearFilter, filtered} = ticketsContext
+
+    const text = useRef('');
 
     useEffect(()=>{
         getTickets()
         // eslint-disable-next-line
     },[])
 
-    if(loading === true || tickets.length < 1){
+    
+    const handleChange = e => {
+        if(text.current.value !== ''){
+            filterTickets(e.target.value)
+        }else{
+            clearFilter()
+        }
+    }
+
+    if(loading === true || tickets === null){
         return <Spinner/>
     }else{
         return (
@@ -43,11 +54,28 @@ const Tickets = () => {
                         </div>
                     </div>
                     <div className="card mt-3" style={{width: '18 rem'}}>
-                        <div className="card-body">
+                        <div className="card-body d-flex align-items-center">
                             <h5 className="card-title">Tickets List</h5>
+                            <div className="input-group mb-0 ms-auto" style={{width: '300px'}}>
+                                <input 
+                                    type="search" 
+                                    className="form-control" 
+                                    placeholder="Search for a ticket..." 
+                                    aria-label="Recipient's username" 
+                                    aria-describedby="basic-addon2"
+                                    ref={text}
+                                    onChange={handleChange}
+                                />
+                                <span className="input-group-text bg-primary" id="basic-addon2">
+                                    <span className="material-icons text-light">search</span>
+                                </span>
+                            </div>
                         </div>
                         <ul className="list-group list-group-flush">
-                            {tickets.map(ticket=> <TicketsItem key={ticket._id} ticket={ticket}/>)}
+                            {filtered !== null ? 
+                                filtered.map(ticket=> (<TicketsItem key={ticket._id} ticket={ticket}/>)) 
+                            :
+                                tickets.map(ticket=> (<TicketsItem key={ticket._id} ticket={ticket}/>)) }
                         </ul>
                     </div>
                 </div>

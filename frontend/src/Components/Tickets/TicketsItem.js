@@ -39,11 +39,10 @@ const TicketsItem = ({ticket}) => {
                 </div>
                 
                 <div className="ms-auto">
-                    {
-                        resolved ? <span className="material-icons text-success">verified</span> 
+                    {resolved ? 
+                        <span className="material-icons text-success">verified</span> 
                     : 
-                        <span className="material-icons text-warning">pending_actions</span>
-                    }
+                        <span className="material-icons text-warning">pending_actions</span>}
                     <span
                         id={_id}
                         style={{cursor:'pointer'}} 

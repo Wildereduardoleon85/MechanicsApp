@@ -21,7 +21,7 @@ const Github = () => {
         searchCommits(searchText);
     }
 
-    if(loading === true || commits.length < 1 || repo.length < 1 ){
+    if(loading === true || commits === null || repo === null ){
         return <Spinner/>
     }else{
         return (

@@ -6,7 +6,9 @@ import {
     GET_SINGLE_TICKET,
     CLEAR_SINGLE,
     UPDATE_TICKET,
-    DELETE_TICKET
+    DELETE_TICKET,
+    FILTER_TICKETS,
+    CLEAR_FILTER
      } from '../types';
 
 
@@ -41,7 +43,7 @@ const ticketsReducer = (state, action) => {
             loading: false
         };
         case CLEAR_SINGLE:
-        return{
+        return{ 
             ...state,
             singleTicket: {
                 message: '',
@@ -53,7 +55,7 @@ const ticketsReducer = (state, action) => {
         return{
             ...state,
             showEditModal: false,
-            singleTicket: [],
+            singleTicket: null,
             loading: false
         };
         case DELETE_TICKET:
@@ -61,6 +63,20 @@ const ticketsReducer = (state, action) => {
             ...state,
             showEditModal: false,
             loading: false
+        };
+        case FILTER_TICKETS:
+        return{
+            ...state,
+            filtered: state.tickets.filter(ticket => {
+                const regex = new RegExp(`${action.payload}`, 'gi');
+                return ticket.message.match(regex) || ticket.mechanic.match(regex)
+            }),
+            loading: false
+        };
+        case CLEAR_FILTER:
+        return{
+            ...state,
+            filtered: null
         };
         default:
             return  state;

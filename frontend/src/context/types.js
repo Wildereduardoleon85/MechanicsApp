@@ -11,3 +11,5 @@ export const DELETE_TICKET = 'DELETE_TICKET';
 export const GET_COMMITS = 'GET_COMMITS';
 export const GET_REPO = 'GET_REPO';
 export const SEARCH_COMMITS = 'SEARCH_COMMITS';
+export const FILTER_TICKETS = 'FILTER_TICKETS';
+export const CLEAR_FILTER = 'CLEAR_FILTER';
