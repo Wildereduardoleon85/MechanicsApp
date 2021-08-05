@@ -7,9 +7,13 @@ const GithubItem = ({comm}) => {
     return (
         <li className="d-flex align-items-center list-group-item text-primary">
             <div>
-                <span>{commit.message}</span> <br/>
+                <a style={{textDecoration: 'none'}} href={html_url} target="_blank" rel="noreferrer">
+                    <span>{commit.message}</span>
+                </a> <br/>
                 <span className="text-secondary">commited at &nbsp;
-                    <span className="text-dark"><Moment format='MMMM Do YYYY, h:mm:ss a'>{commit.author.date}</Moment></span>
+                    <span className="text-dark">
+                        <Moment format='MMMM Do YYYY, h:mm:ss a'>{commit.author.date}</Moment>
+                    </span>
                 </span>
             </div>
             <div className="ms-auto">

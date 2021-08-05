@@ -16,7 +16,7 @@ const Tickets = () => {
         // eslint-disable-next-line
     },[])
 
-    if(loading === true && tickets.length < 1){
+    if(loading === true || tickets.length < 1){
         return <Spinner/>
     }else{
         return (
@@ -32,7 +32,8 @@ const Tickets = () => {
                                 className="addTIcket-btn btn-primary ms-3"
                                 data-bs-toggle="modal" data-bs-target="#addTicketModal"
                             >
-                                    <span className="material-icons">note_add</span></button>
+                                <span className="material-icons">note_add</span>
+                            </button>
                             <button 
                                 className="addMechanic-btn btn-success ms-3"
                                 data-bs-toggle="modal" data-bs-target="#addMechanicModal"

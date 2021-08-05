@@ -1,6 +1,7 @@
 import { 
     GET_COMMITS, 
-    GET_REPO
+    GET_REPO,
+    SEARCH_COMMITS
      } from '../types';
 
 
@@ -16,6 +17,12 @@ const githubReducer = (state, action) => {
             return{
                 ...state,
                 repo: action.payload,
+                loading: false
+            };
+        case SEARCH_COMMITS:
+            return{
+                ...state,
+                commits: action.payload,
                 loading: false
             };
         default:

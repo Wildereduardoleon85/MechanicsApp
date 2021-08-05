@@ -4,7 +4,8 @@ import GithubContext from './githubContext';
 import githubReducer from './githubReducer';
 import { 
     GET_COMMITS,
-    GET_REPO
+    GET_REPO,
+    SEARCH_COMMITS
     } from '../types';
 
 const GithubState = props => {
@@ -18,7 +19,8 @@ const GithubState = props => {
 
     // Get Commits
     const getCommits = async () => {
-        const url = 'https://api.github.com/search/commits?q=repo:wildereduardoleon85/MechanicsApp author-date:2021-08-03..2021-08-06'
+        const url = 'https://api.github.com/search/commits?q=repo:wildereduardoleon85/'+
+                    'MechanicsApp author-date:2021-08-03..2021-08-06&sort=author-date&order=desc'
         const config = {
             headers: {
                 'Accept': 'application/vnd.github.cloak-preview+json'
@@ -28,6 +30,22 @@ const GithubState = props => {
         dispatch({type: GET_COMMITS, payload: res.data.items});
     };
 
+
+    // Search Commits
+    const searchCommits = async (text) => {
+        const url = `https://api.github.com/search/commits?q=${text} repo:wildereduardoleon85/`+
+                    'MechanicsApp author-date:2021-08-03..2021-08-06&sort=author-date&order=desc'
+        const config = {
+            headers: {
+                'Accept': 'application/vnd.github.cloak-preview+json'
+            }
+        }
+        const res = await axios.get(url, config);
+        dispatch({type: SEARCH_COMMITS, payload: res.data.items});
+    };
+
+
+    // Get Repo Info
     const getRepo = async ()=> {
         const res = await axios.get('https://api.github.com/repos/wildereduardoleon85/MechanicsApp');
         dispatch({type: GET_REPO, payload: res.data});
@@ -41,7 +59,8 @@ const GithubState = props => {
                 loading: state.loading,
                 repo: state.repo,
                 getCommits,
-                getRepo
+                getRepo,
+                searchCommits
             }}
         >
             {props.children}
