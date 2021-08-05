@@ -32,7 +32,7 @@ const Tickets = () => {
     }else{
         return (
             <>
-                <div className="tickets container col-7 mt-5 mb-5">
+                <div className="tickets container col-xxl-7 mt-5 mb-5">
                     <div className="d-flex align-items-center">
                         <div className="carLogo">
                             <img src="./img/carLogo.png" alt="Car Logo" />
@@ -54,7 +54,7 @@ const Tickets = () => {
                         </div>
                     </div>
                     <div className="card mt-3" style={{width: '18 rem'}}>
-                        <div className="card-body d-flex align-items-center">
+                        <div className="search-input card-body d-flex align-items-center">
                             <h5 className="card-title">Tickets List</h5>
                             <div className="input-group mb-0 ms-auto" style={{width: '300px'}}>
                                 <input 
@@ -72,10 +72,9 @@ const Tickets = () => {
                             </div>
                         </div>
                         <ul className="list-group list-group-flush">
-                            {filtered !== null ? 
-                                filtered.map(ticket=> (<TicketsItem key={ticket._id} ticket={ticket}/>)) 
-                            :
-                                tickets.map(ticket=> (<TicketsItem key={ticket._id} ticket={ticket}/>)) }
+                            {filtered !== null ? filtered.map(ticket=> (<TicketsItem key={ticket._id} ticket={ticket}/>)) 
+                                :
+                            tickets.map(ticket=> (<TicketsItem key={ticket._id} ticket={ticket}/>)) }
                         </ul>
                     </div>
                 </div>

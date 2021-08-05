@@ -5,17 +5,14 @@ import githubReducer from './githubReducer';
 import { 
     GET_COMMITS,
     GET_REPO,
-    SEARCH_COMMITS,
-    CLEAR_COMMITS_FILTER,
-    FILTER_COMMITS
+    SEARCH_COMMITS
     } from '../types';
 
 const GithubState = props => {
     const initialState = {
         commits: null,
         loading: true,
-        repo: null,
-        filteredCommits: null
+        repo: null
     };
 
     const [state, dispatch] = useReducer(githubReducer, initialState);
@@ -54,17 +51,6 @@ const GithubState = props => {
         dispatch({type: GET_REPO, payload: res.data});
     }
 
-    //Filter commits
-    const filterCommits = (text)=> {
-        dispatch({type: FILTER_COMMITS, payload: text})
-    }
-
-    //Clear commits
-    const clearCommitsFilter = () => {
-        dispatch({type: CLEAR_COMMITS_FILTER})
-    }
-    
-
     return (
         <GithubContext.Provider 
             value={{
@@ -73,10 +59,7 @@ const GithubState = props => {
                 repo: state.repo,
                 getCommits,
                 getRepo,
-                searchCommits,
-                filteredCommits: state.filteredCommits,
-                filterCommits,
-                clearCommitsFilter
+                searchCommits
             }}
         >
             {props.children}

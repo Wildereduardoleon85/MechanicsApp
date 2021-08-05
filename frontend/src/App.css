@@ -140,3 +140,39 @@
     border-width: 1px;
   }
 }
+
+.github .card-body .ms-auto .input-group {
+  width: 400px;
+}
+
+/* Media Queries */
+@media screen and (max-width: 492px) {
+  .search-input {
+    flex-direction: column;
+  }
+
+  .search-input .input-group {
+    width: 90%;
+    margin: 0 auto;
+  }
+
+  .tickets > div > div:nth-child(2) {
+    flex-direction: column;
+  }
+}
+
+@media screen and (max-width: 786px) {
+  .github .card-body {
+    flex-direction: column;
+  }
+
+  .github .card-body .ms-auto {
+    margin: 10px auto 0 auto;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .github .card-body .ms-auto .input-group {
+    width: 300px;
+  }
+}

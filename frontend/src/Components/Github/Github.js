@@ -1,4 +1,4 @@
-import React, {useEffect, useContext, useState, useRef} from 'react';
+import React, {useEffect, useContext, useState} from 'react';
 import GithubContext from '../../context/github/githubContext';
 import GithubItem from './GithubItem';
 import Spinner from '../Spinner';
@@ -6,10 +6,9 @@ import Spinner from '../Spinner';
 const Github = () => {
     const githubContext = useContext(GithubContext);
 
-    const { loading, commits, getCommits, repo, getRepo, searchCommits, 
-            filterCommits, clearCommitsFilter, filteredCommits} = githubContext;
+    const { loading, commits, getCommits, repo, getRepo, searchCommits} = githubContext;
 
-    const text = useRef('');
+    const [searchText, setSearchText] = useState('');
 
     useEffect(()=>{
         getCommits();
@@ -17,27 +16,18 @@ const Github = () => {
         // eslint-disable-next-line
     },[])
 
-    const [searchText, setSearchText] = useState('');
-
-    /* const handleSubmit = e => {
+    const handleSubmit = e => {
         e.preventDefault();
         searchCommits(searchText);
-    } */
-
-    const handleChange = e => {
-        if(text.current.value !== ''){
-            filterCommits(e.target.value)
-        }else{
-            clearCommitsFilter()
-        }
     }
+    
 
     if(loading === true || commits === null || repo === null ){
         return <Spinner/>
     }else{
         return (
             <>
-                <div className="tickets container col-7 mt-5 mb-5">
+                <div className="github container col-xxl-7 mt-5 mb-5">
                     <div className="d-flex align-items-center">
                         <div className="githubLogo">
                             <img src="./img/github.png" alt="Github Logo" />
@@ -46,33 +36,35 @@ const Github = () => {
                     </div>
                     <div className="card mt-3" style={{width: '18 rem'}}>
                         <div className="card-body d-flex align-items-center">
-                            <div className="avatar">
-                                <img src={repo.owner.avatar_url} alt="Avatar" />
+                            <div className="d-flex align-items-center">
+                                <div className="avatar">
+                                    <img src={repo.owner.avatar_url} alt="Avatar" />
+                                </div>
+                                <h4 className="mb-0 ms-4 card-title">{repo.name}</h4>
                             </div>
-                            <h4 className="mb-0 ms-4 card-title">{repo.name}</h4>
-                            <div className="input-group mb-0 ms-auto" style={{width: '340px'}}>
-                                <input 
-                                    type="search" 
-                                    className="form-control" 
-                                    placeholder='Search for commits, e.g "navbar..."' 
-                                    aria-label="Recipient's username" 
-                                    aria-describedby="basic-addon2"
-                                    ref={text}
-                                    onChange={handleChange}
-                                />
-                                <span 
-                                    className="d-flex align-item-center bg-primary input-group-text text-light" 
-                                    id="basic-addon2"
-                                >
-                                    <span className="material-icons">search</span>
-                                </span>
-                            </div>
+                            <form className="ms-auto" onSubmit={handleSubmit}>
+                                <div className="input-group mb-0">
+                                    <input 
+                                        type="search" 
+                                        className="form-control" 
+                                        placeholder='Search for commits, e.g "navbar..."' 
+                                        aria-label="Recipient's username" 
+                                        aria-describedby="basic-addon2"
+                                        value={searchText}
+                                        onChange={(e)=>setSearchText(e.target.value)}
+                                    />
+                                    <button 
+                                        className="d-flex align-item-center btn btn-primary input-group-text text-light" 
+                                        id="basic-addon2"
+                                        type="submit"
+                                    >
+                                        <span className="material-icons">search</span> Search
+                                    </button>
+                                </div>
+                            </form>
                         </div>
                         <ul className="list-group list-group-flush">
-                            {filteredCommits !== null ? 
-                                filteredCommits.map(comm =>(<GithubItem key={comm.node_id} comm={comm}/>))
-                            :
-                                commits.map(comm =>(<GithubItem key={comm.node_id} comm={comm}/>))}
+                            {commits.map(comm =>(<GithubItem key={comm.node_id} comm={comm}/>))}
                         </ul>
                     </div>
                 </div>
