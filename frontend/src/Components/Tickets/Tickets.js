@@ -4,6 +4,7 @@ import AddTicketModal from './AddTicketModal';
 import AddMechanicModal from '../Mechanics/AddMechanicModal';
 import TicketsItem from './TicketsItem';
 import EditTicketModal from './EditTicketModal';
+import Spinner from '../Spinner';
 
 const Tickets = () => {
     const ticketsContext = useContext(TicketsContext);
@@ -16,7 +17,7 @@ const Tickets = () => {
     },[])
 
     if(loading === true && tickets.length < 1){
-        return <h2>Loading...</h2>
+        return <Spinner/>
     }else{
         return (
             <>

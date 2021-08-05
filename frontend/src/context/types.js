@@ -8,3 +8,5 @@ export const GET_SINGLE_TICKET = 'GET_SINGLE_TICKET';
 export const CLEAR_SINGLE = 'CLEAR_SINGLE';
 export const UPDATE_TICKET = 'UPDATE_TICKET';
 export const DELETE_TICKET = 'DELETE_TICKET';
+export const GET_COMMITS = 'GET_COMMITS';
+export const GET_REPO = 'GET_REPO';
