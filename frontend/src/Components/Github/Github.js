@@ -1,4 +1,4 @@
-import React, {useEffect, useContext, useState} from 'react';
+import React, {useEffect, useContext, useState, useRef} from 'react';
 import GithubContext from '../../context/github/githubContext';
 import GithubItem from './GithubItem';
 import Spinner from '../Spinner';
@@ -6,7 +6,10 @@ import Spinner from '../Spinner';
 const Github = () => {
     const githubContext = useContext(GithubContext);
 
-    const {loading, commits, getCommits, repo, getRepo, searchCommits} = githubContext
+    const { loading, commits, getCommits, repo, getRepo, searchCommits, 
+            filterCommits, clearCommitsFilter, filteredCommits} = githubContext;
+
+    const text = useRef('');
 
     useEffect(()=>{
         getCommits();
@@ -16,9 +19,17 @@ const Github = () => {
 
     const [searchText, setSearchText] = useState('');
 
-    const handleSubmit = e => {
+    /* const handleSubmit = e => {
         e.preventDefault();
         searchCommits(searchText);
+    } */
+
+    const handleChange = e => {
+        if(text.current.value !== ''){
+            filterCommits(e.target.value)
+        }else{
+            clearCommitsFilter()
+        }
     }
 
     if(loading === true || commits === null || repo === null ){
@@ -39,31 +50,29 @@ const Github = () => {
                                 <img src={repo.owner.avatar_url} alt="Avatar" />
                             </div>
                             <h4 className="mb-0 ms-4 card-title">{repo.name}</h4>
-                            <form className="ms-auto" onSubmit={handleSubmit}>
-                                <div className="input-group mb-0" style={{width: '340px'}}>
-                                    <input 
-                                        type="search" 
-                                        className="form-control" 
-                                        placeholder='Search for commits, e.g "navbar..."' 
-                                        aria-label="Recipient's username" 
-                                        aria-describedby="basic-addon2"
-                                        value={searchText}
-                                        onChange={(e)=>setSearchText(e.target.value)}
-                                    />
-                                    <button 
-                                        className="btn btn-primary d-flex align-item-center input-group-text text-light" 
-                                        id="basic-addon2"
-                                        type="submit"
-                                    >
-                                        <span className="material-icons">search</span>
-                                    </button>
-                                </div>
-                            </form>
+                            <div className="input-group mb-0 ms-auto" style={{width: '340px'}}>
+                                <input 
+                                    type="search" 
+                                    className="form-control" 
+                                    placeholder='Search for commits, e.g "navbar..."' 
+                                    aria-label="Recipient's username" 
+                                    aria-describedby="basic-addon2"
+                                    ref={text}
+                                    onChange={handleChange}
+                                />
+                                <span 
+                                    className="d-flex align-item-center bg-primary input-group-text text-light" 
+                                    id="basic-addon2"
+                                >
+                                    <span className="material-icons">search</span>
+                                </span>
+                            </div>
                         </div>
                         <ul className="list-group list-group-flush">
-                            {commits.map(comm =>(
-                                <GithubItem key={comm.node_id} comm={comm}/>
-                            ))}
+                            {filteredCommits !== null ? 
+                                filteredCommits.map(comm =>(<GithubItem key={comm.node_id} comm={comm}/>))
+                            :
+                                commits.map(comm =>(<GithubItem key={comm.node_id} comm={comm}/>))}
                         </ul>
                     </div>
                 </div>
